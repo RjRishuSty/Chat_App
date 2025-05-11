@@ -6,19 +6,22 @@ const theme = createTheme({
         mode: "light",
         background: {
             default: "#F5F5F5",      // Body background
-            main:'#F8E7F6',  //card
-            primary:"#DD88CF",
+            main: '#F8E7F6',  //card
+            primary: "#e9afdf",
+            opitonal: '#eae6ff'  // Icon backgrond
         },
         primary: {
             main: "#C5BAFF",         // Accent color for buttons, links, icons
             contrastText: "#121212",
         },
         text: {
+            default: '#fff',
             primary: "#121212",      // Main readable text
             secondary: "#4F4F4F",    // Subtext or less emphasized text
+
         },
-        secondary:{
-            default:'#ffffff',
+        links: {
+            main: "#6a4dff" // For links
         },
         divider: "#D1D1D1",
     },
@@ -40,6 +43,29 @@ const theme = createTheme({
             },
         },
     },
+    MuiOutlinedInput: {
+        styleOverrides: {
+            root: {
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'black', // Default
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#e9afdf', // Focus color
+                },
+            },
+        },
+    },
+    MuiLink: {
+        styleOverrides: {
+            root: {
+                color: 'links.main',
+                textDecoration: 'underline', // Optional: remove underline
+                '&:hover': {
+                    textDecoration: 'underline', // Optional: add underline on hover
+                },
+            },
+        },
+    }
 });
 
 export default theme;
