@@ -1,6 +1,6 @@
 //! importing install dependencies.............
-import React, { useMemo, useState } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React, { useMemo } from 'react'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 //! Importing created file.............
 import AppLayout from './layout/AppLayout';
@@ -11,35 +11,38 @@ import SettingsPages from './pages/SettingsPages';
 import PageNotFound from './pages/PageNotFound';
 import theme from '../theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-
-  const [appMode, setAppMode] = useState("light");
+  const appMode = useSelector((state) => state.appMode.mode);
+  const auth = useSelector((state) => state.auth.auth);
+  console.log(auth);
   const currentTheme = useMemo(() => theme(appMode), [appMode]);
 
-  const toggleAppMode = () => {
-    setAppMode((prev) => (prev === "light" ? "dark" : "light"));
-  };
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <AppLayout toggleAppMode={toggleAppMode} />,
+      element: <AppLayout />,
       children: [
         {
           path: '/',
-          element: <HomePage />
+          element: auth ? <HomePage /> : <Navigate to="/login" />
         },
         {
           path: '/signup',
-          element: <SignupPage />
+          element: !auth ? <SignupPage /> : <Navigate to='/' />
         },
         {
           path: '/login',
-          element: <LoginPage />
+          element: !auth ? <LoginPage /> : <Navigate to='/' />
         },
         {
           path: '/settings',
           element: <SettingsPages />
+        },
+        {
+          path: '/profile',
+          element: auth ? <SettingsPages /> : <Navigate to='/login' />
         },
         {
           path: '*',

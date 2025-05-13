@@ -11,7 +11,7 @@ const AppMode = () => {
     const dispatch = useDispatch();
     return (
         <IconButton onClick={() => dispatch(toggleAppMode())}
-            sx={{ backgroundColor: { xs: "none", sm: 'background.main' }, borderRadius: 2 }}
+            sx={{ backgroundColor: { xs: "transparent", sm: 'background.main' }, borderRadius: 2 }}
         >
             {mode === 'light' ? <Brightness4Icon fontSize="large" /> : <WbSunnyIcon fontSize="large" />}
         </IconButton>

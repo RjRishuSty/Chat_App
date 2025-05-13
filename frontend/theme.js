@@ -6,18 +6,18 @@ const setAppMode = (mode) => ({
     palette: {
         mode,
         background: {
-            default: "#F5F5F5",      // Body background
+            default: mode === 'light'?"#F5F5F5":'#17153B',      // Body background
             main: '#F8E7F6',  //card
             primary: "#e9afdf",
             opitonal: '#eae6ff'  // Icon backgrond
         },
         primary: {
-            main: "#C5BAFF",         // Accent color for buttons, links, icons
+            main: mode==='light'?"#C5BAFF":"#C8ACD6",         // Accent color for buttons, links, icons
             contrastText: "#121212",
         },
         text: {
             default: '#fff',
-            primary: "#121212",      // Main readable text
+            primary: mode ==='light'?"#121212":'#ffff',      // Main readable text
             secondary: "#4F4F4F",    // Subtext or less emphasized text
 
         },
