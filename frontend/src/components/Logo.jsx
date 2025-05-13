@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 const Logo = ({ useIn }) => {
     return (
         <Stack
+        flexGrow={1}
             direction={useIn === 'header' ? "row" : "column"}
             alignItems="center"
             spacing={1}

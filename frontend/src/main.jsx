@@ -8,17 +8,17 @@ import '@fontsource/nunito';
 import './index.css'
 import App from './App.jsx'
 import '@fontsource/nunito';
-import { ThemeProvider } from '@emotion/react';
-import theme from '../theme.js';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <SnackbarProvider>
-      <ThemeProvider theme={theme}>
+      <Provider store={store}>
         <App />
-      </ThemeProvider>
+      </Provider>
     </SnackbarProvider>
   </StrictMode>,
 )

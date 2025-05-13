@@ -1,12 +1,11 @@
 //! Importing installed dependencies ................
 import React from "react";
-import { Box, Button, Card, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { motion } from 'framer-motion';
 
 //! Importing created file.............
 import AnimatedSquares from "../components/AnimatedSquares";
 import Cards from "../components/Cards";
-// import img from '../assets/login.png';
 
 //! Reusable Flex Center Style
 const flexCenterColumn = {
@@ -34,14 +33,16 @@ const textFade = {
 
 const LoginPage = () => {
 
+  const isTablet = useMediaQuery("(max-width:768px)");
+
   return (
-    <Stack component="section" sx={{ mt: 7.5, overflow: 'hidden' }}>
-      <Grid container>
+    <Stack component="section" sx={{ mt: 9, overflow: 'hidden' }}>
+      <Grid container sx={{height:"90vh"}}>
         <Grid
-          size={{ xs: 12, sm: 12, md: 6 }}
+          size={{ xs: 12, sm: isTablet?12:6, md: 6 }}
           sx={{
             backgroundColor: 'background.main',
-            py: 9.5,
+            height:"100%",
             ...flexCenterColumn
 
           }}
@@ -53,11 +54,11 @@ const LoginPage = () => {
           <Cards useIn="login" />
 
         </Grid>
-        <Grid
-          size={{ xs: 12, sm: 12, md: 6 }}
+        {!isTablet?<Grid
+          size={{ xs: 12, sm: 6, md: 6 }}
           sx={{
             backgroundColor: 'background.primary',
-            py: 9.5,
+            height:"100%",
             ...flexCenterColumn
           }}
           component={motion.div}
@@ -71,10 +72,10 @@ const LoginPage = () => {
             variants={textFade}
             initial="hidden"
             animate="visible">
-            <Typography variant="h3">Welcome back!</Typography>
+            <Typography variant="h4">Welcome back!</Typography>
             <Typography variant="body1" sx={{ textAlign: 'center', width: '80%', mt: 1, color: 'text.secondary' }}>Log in to continue your conversations, connect with friends, and stay updated in real-time. Your chats are just a click away.</Typography>
           </Box>
-        </Grid>
+        </Grid>:null}
       </Grid>
     </Stack>
 

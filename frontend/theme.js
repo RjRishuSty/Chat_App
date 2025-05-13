@@ -1,9 +1,10 @@
 // theme.js
 import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+
+const setAppMode = (mode) => ({
     palette: {
-        mode: "light",
+        mode,
         background: {
             default: "#F5F5F5",      // Body background
             main: '#F8E7F6',  //card
@@ -67,5 +68,7 @@ const theme = createTheme({
         },
     }
 });
+
+const theme = (mode = "light") => createTheme(setAppMode(mode));
 
 export default theme;

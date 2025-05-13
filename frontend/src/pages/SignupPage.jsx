@@ -1,6 +1,6 @@
 //! Importing installed dependencies ................
 import React from "react";
-import { Box, Button, Card, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { motion } from 'framer-motion';
 
 //! Importing created file.............
@@ -34,14 +34,16 @@ const textFade = {
 
 const SignupPage = () => {
 
+  const isTablet = useMediaQuery("(max-width:768px)");
+
   return (
-    <Stack component="section" sx={{ mt: 7.5, overflow: 'hidden' }}>
-      <Grid container>
+    <Stack component="section" sx={{ mt: 9, overflow: 'hidden' }}>
+      <Grid container sx={{ height: "90vh" }}>
         <Grid
-          size={{ xs: 12, sm: 12, md: 6 }}
+          size={{ xs: 12, sm: isTablet ? 12 : 6, md: 6 }}
           sx={{
             backgroundColor: 'background.main',
-            py: 9.5,
+            height: '100%',
             ...flexCenterColumn
 
           }}
@@ -53,11 +55,11 @@ const SignupPage = () => {
           <Cards useIn="signup" />
 
         </Grid>
-        <Grid
-          size={{ xs: 12, sm: 12, md: 6 }}
+        {!isTablet ? <Grid
+          size={{ xs: 12, sm: 6, md: 6 }}
           sx={{
             backgroundColor: 'background.primary',
-            py: 9.5,
+            height: '100%',
             ...flexCenterColumn
           }}
           component={motion.div}
@@ -71,10 +73,10 @@ const SignupPage = () => {
             variants={textFade}
             initial="hidden"
             animate="visible">
-            <Typography variant="h3">Join our community!</Typography>
+            <Typography variant="h4">Join our community!</Typography>
             <Typography variant="body1" sx={{ textAlign: 'center', width: '80%', mt: 1, color: 'text.secondary' }}>Create your account to connect, chat, and grow with people around the world. Share ideas, stay updated, and be part of a vibrant, real-time conversation community.</Typography>
           </Box>
-        </Grid>
+        </Grid> : null}
       </Grid>
     </Stack>
 
