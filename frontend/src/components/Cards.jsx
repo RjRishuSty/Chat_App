@@ -70,6 +70,7 @@ const Cards = ({ useIn }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
+                p:5
             }}
         >
             <Logo useIn="inCard" />

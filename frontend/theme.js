@@ -7,8 +7,8 @@ const setAppMode = (mode) => ({
         mode,
         background: {
             default: mode === 'light' ? "#F5F5F5" : '#17153B',      // Body background
-            main: '#F8E7F6',  //card
-            primary: "#e9afdf",
+            main: mode === 'light' ? '#F8E7F6' : '#2E236C',
+            primary: mode === 'light' ? "#e9afdf" : '#000',
             opitonal: '#eae6ff'  // Icon backgrond
         },
         primary: {
@@ -16,13 +16,12 @@ const setAppMode = (mode) => ({
             contrastText: "#121212",
         },
         text: {
-            default: '#fff',
-            primary: mode === 'light' ? "#121212" : '#ffff',      // Main readable text
-            secondary: "#4F4F4F",    // Subtext or less emphasized text
-
+            default: '#000',
+            primary: mode === 'light' ? "#121212" : '#ffff',
+            secondary: mode === 'light' ?"#4F4F4F":'#fff',
         },
         links: {
-            main: "#6a4dff" // For links
+            main: mode === 'light' ? "#6a4dff" : '#C8ACD6'  // For links
         },
         divider: "#D1D1D1",
     },

@@ -18,7 +18,7 @@ const ChatHeader = () => {
                         sx={{ borderRadius: 20, backgroundColor: "background.opitonal" }}
                     >
                         <PeopleIcon
-                            sx={{ fontSize: "3rem", color: "primary" }}
+                            sx={{ fontSize: "2rem", color: "primary" }}
                         />
                     </IconButton>
                 </Grid>

@@ -1,40 +1,53 @@
-import { Grid, Stack } from '@mui/material'
+import { Box, Grid, Stack, Typography } from '@mui/material'
 import React from 'react'
 import ChatFooter from './ChatFooter'
+import Messages from './Messages'
+import img from "../assets/login.png";
 
 const ChatBody = () => {
   return (
-    <Stack sx={{ flex: 1, border: '2px solid green' }}>
+    <Stack sx={{ flex: 1 }}>
       <Grid container sx={{ height: '100%' }}>
-        <Grid
-          item
-          md={1}
-          sm={1}
-          xs={1}
+        <Grid size={{ md: 1, sm: 1, xs: 1 }}
           sx={{
             borderRight: 1,
-            border: '2px solid black',
-            height: '100%'
+            height: '100%',
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'start',
+            
           }}
         >
-          {/* Left sidebar */}
+          <Box
+            component="img"
+            src={img}
+            alt="Chat"
+            sx={{
+              width: "50px",
+              height: "50px",
+              boxShadow: "0px 0px 5px #6a4dff",
+              borderRadius: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              p: 1,
+              mt:2.5,
+              backgroundColor:'white',
+            }}
+          />
         </Grid>
-        <Grid
-          item
-          md={11}
-          sm={11}
-          xs={11}
+        <Grid size={{ md: 11, sm: 11, xs: 11 }}
           sx={{
-            px: 4,
-            border: '2px solid black',
+            // border: "2px solid red",
+            px: 1,
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            overflow: 'hidden',
+
           }}
         >
-          {/* Chat content */}
-          <div style={{ flex: 1 }}>Chat messages go here</div>
+          <Messages />
           <ChatFooter />
         </Grid>
       </Grid>
