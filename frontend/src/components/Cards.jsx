@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Card, Typography, Button } from "@mui/material";
+import { Card, Typography, Button, useMediaQuery } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import InputesFields from "./InputesFields";
@@ -9,6 +9,7 @@ import { enqueueSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 
 const Cards = ({ useIn }) => {
+    const isTablet = useMediaQuery("(max-width:992px)")
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -62,7 +63,7 @@ const Cards = ({ useIn }) => {
             component="form"
             onSubmit={handleSubmit}
             sx={{
-                width: "80%",
+                width: isTablet?"100%":"80%",
                 backgroundColor: "transparent",
                 border: "none",
                 boxShadow: "none",
