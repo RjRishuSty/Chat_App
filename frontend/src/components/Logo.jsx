@@ -17,9 +17,8 @@ const Logo = ({ useIn }) => {
         >
             <IconButton
                 sx={{
-                    //   border: "2px solid red",
                     borderRadius: 2,
-                    backgroundColor: "background.opitonal",
+                    backgroundColor: useIn === 'header'?"" :"background.opitonal"
                 }}
             >
                 <MarkChatUnreadIcon fontSize="large" color="primary" />

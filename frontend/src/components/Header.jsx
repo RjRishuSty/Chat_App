@@ -13,12 +13,19 @@ import Logo from "./Logo";
 import AppMode from "./AppMode";
 import Person3Icon from "@mui/icons-material/Person3";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/slices/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-    const auth = useSelector((state) => state.auth.auth);
-    console.log(auth);
+    const authUser = useSelector((state) => state.auth.authUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const handlerLogout = () => {
+        dispatch(logout())
+        navigate('/login')
+    }
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -32,7 +39,7 @@ const Header = () => {
             >
                 <Toolbar>
                     <Logo useIn="header" />
-                    {auth ? (
+                    {authUser ? (
                         <Box sx={{ mr: 5, px: 3 }}>
                             <Button
                                 variant="contained"
@@ -45,10 +52,11 @@ const Header = () => {
                                 Profile
                             </Button>
                             <Button
+                                onClick={handlerLogout}
                                 variant="contained"
                                 size="medium"
                                 sx={{ color: "text.primary" }}
-                                 endIcon={
+                                endIcon={
                                     <LogoutIcon fontSize="medium" />
                                 }
                             >

@@ -36,8 +36,8 @@ const LoginPage = () => {
   const isTablet = useMediaQuery("(max-width:768px)");
 
   return (
-    <Stack component="section" sx={{ mt: 9, overflow: 'hidden' }}>
-      <Grid container sx={{ height: "90vh" }}>
+    <Stack component="section" sx={{ overflow: 'hidden' }}>
+      <Grid container sx={{ height: "100vh" }}>
         <Grid
           size={{ xs: 12, sm: isTablet ? 12 : 6, md: 6 }}
           sx={{

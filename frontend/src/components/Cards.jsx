@@ -1,19 +1,27 @@
 import React, { useCallback, useState } from "react";
 import { Card, Typography, Button, useMediaQuery } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import InputesFields from "./InputesFields";
 import Logo from "./Logo";
 import { Link as MuiLink } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxios from "../custom-hooks/useAxios";
+import { checkAuth } from "../store/slices/auth.slice";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Cards = ({ useIn }) => {
-    const isTablet = useMediaQuery("(max-width:992px)")
+    const isTablet = useMediaQuery("(max-width:992px)");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const isAuth = useSelector((state) => state.auth.isAuth);
+    const authUser = useSelector((state) => state.auth.authUser);
+    console.log("card", isAuth);
+    console.log("Card", authUser);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+    const { request } = useAxios();
     const handleChange = useCallback((e) => {
         setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     }, []);
@@ -30,11 +38,23 @@ const Cards = ({ useIn }) => {
         }
         return true;
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (handleValidate()) {
-            enqueueSnackbar("Login successfully!", { variant: "success" });
-            console.log(formData);
+            try {
+                const response = await request({
+                    url: useIn === 'signup' ? '/api/signup' : '/api/login',
+                    method: "POST",
+                    data: formData,
+                });
+                console.log("==>", response.data)
+                dispatch(checkAuth(response.data));
+                enqueueSnackbar(response.message, { variant: "success" });
+                navigate("/");
+            } catch (error) {
+                enqueueSnackbar(error.response.data.message, { variant: "error" });
+            }
+
         }
     };
     const renderCardContent = () => {
@@ -63,15 +83,17 @@ const Cards = ({ useIn }) => {
             component="form"
             onSubmit={handleSubmit}
             sx={{
-                width: isTablet?"100%":"80%",
+                width: isTablet ? "100%" : "80%",
                 backgroundColor: "transparent",
+                "--Paper-overlay": "none",
+                backgroundImage: "none",
                 border: "none",
                 boxShadow: "none",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
-                p:5
+                p: 5
             }}
         >
             <Logo useIn="inCard" />
@@ -91,10 +113,10 @@ const Cards = ({ useIn }) => {
                     color: "text.primary",
                     fontWeight: 900,
                     letterSpacing: 1,
-                    textTransform:'capitalize',
+                    textTransform: 'capitalize',
                     "&:hover": { color: "text.default" },
                 }}
-                // endIcon={<LoginIcon fontSize="large" />}
+            // endIcon={<LoginIcon fontSize="large" />}
             >
                 {useIn === 'login' ? " Login" : "Create Account"}
             </Button>
