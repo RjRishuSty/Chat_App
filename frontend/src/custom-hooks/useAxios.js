@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const BASE_URL = "http://localhost:3000";
 // Set globally ONCE for send the cookies
 axios.defaults.withCredentials = true;
 
@@ -11,11 +10,12 @@ const useAxios = () => {
     const [error, setError] = useState(null);
 
     const request = async ({ url, method = "GET", data = null, headers = {} }) => {
+        
         setloading(true);
         setError(null);
 
         try {
-            const response = await axios({ url: `${BASE_URL}${url}`, method, data, headers, withCredentials: true });
+            const response = await axios({ url: `http://localhost:3000${url}`, method, data, headers, withCredentials: true });
             return response.data;
         } catch (error) {
             setError(error);

@@ -6,8 +6,8 @@ import { Link as MuiLink } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import useAxios from "../custom-hooks/useAxios";
-import { checkAuth } from "../store/slices/auth.slice";
-import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth, login, signup } from "../store/slices/auth.slice";
+import { useDispatch } from 'react-redux';
 
 const Cards = ({ useIn }) => {
     const isTablet = useMediaQuery("(max-width:992px)");
@@ -15,10 +15,7 @@ const Cards = ({ useIn }) => {
     const xsMobile = useMediaQuery("(max-width:375px)");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isAuth = useSelector((state) => state.auth.isAuth);
-    const authUser = useSelector((state) => state.auth.authUser);
-    console.log("card", isAuth);
-    console.log("Card", authUser);
+ 
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -49,10 +46,10 @@ const Cards = ({ useIn }) => {
                     method: "POST",
                     data: formData,
                 });
-                console.log("==>", response.data)
                 dispatch(checkAuth(response.data));
+                dispatch(useIn === 'login' ? login(response.data) : signup());
                 enqueueSnackbar(response.message, { variant: "success" });
-                navigate("/");
+                navigate(useIn === 'login' ? "/" : "/login");
             } catch (error) {
                 enqueueSnackbar(error.response.data.message, { variant: "error" });
             }
@@ -86,7 +83,7 @@ const Cards = ({ useIn }) => {
             onSubmit={handleSubmit}
             sx={{
                 width: isTablet ? "100%" : "80%",
-                height:'100%',
+                height: '100%',
                 backgroundColor: "transparent",
                 "--Paper-overlay": "none",
                 backgroundImage: "none",
@@ -96,11 +93,11 @@ const Cards = ({ useIn }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
-                py:xsMobile?4: 5,
-                px:xsMobile?2: 5,
+                py: xsMobile ? 4 : 5,
+                px: xsMobile ? 2 : 5,
             }}
         >
-            {!minTablet ?<>
+            {!minTablet ? <>
                 <Logo useIn="inCard" />
                 <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
                     {useIn === 'login' ? "Welcome Back" : "Create Account"}
@@ -108,7 +105,7 @@ const Cards = ({ useIn }) => {
                 <Typography variant="body1" sx={{ mb: 3 }}>
                     {useIn === 'login' ? "Sign in to your account" : "Get started with your free account"}
                 </Typography>
-            </>:null}
+            </> : null}
             {renderCardContent()}
             <Button
                 fullWidth

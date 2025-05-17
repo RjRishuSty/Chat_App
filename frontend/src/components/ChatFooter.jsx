@@ -12,6 +12,7 @@ const ChatFooter = () => {
         sx={{
           backgroundColor: 'white',
           borderRadius: 1,
+          m:1,
           '& .MuiInputBase-input': {
             fontSize: '1rem', // Adjust font size here if needed
             color: 'black',   // Properly set text color

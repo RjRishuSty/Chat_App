@@ -33,7 +33,7 @@ const AnimatedSquares = () => {
               width: miniLaptop?70:100,            
               height: miniLaptop?70:100,             
               borderRadius: 2,
-              backgroundColor: '#F8E7F6',
+              backgroundColor: '#A0C878',
               boxShadow: '0 0 10px rgba(248, 231, 246, 0.4)',
             }}
           />

@@ -7,7 +7,6 @@ import { toggleAppMode } from "../store/slices/AppMode.slice";
 
 const AppMode = () => {
     const mode = useSelector((state) => state.appMode.mode);
-    console.log(mode)
     const dispatch = useDispatch();
     return (
         <IconButton onClick={() => dispatch(toggleAppMode())}

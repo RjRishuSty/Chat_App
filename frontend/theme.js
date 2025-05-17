@@ -6,17 +6,17 @@ const setAppMode = (mode) => ({
     palette: {
         mode,
         background: {
-            default: mode === 'light' ? "#F5F5F5" : '#17153B',      // Body background
-            main: mode === 'light' ? '#F8E7F6' : '#2E236C',
-            primary: mode === 'light' ? "#e9afdf" : '#000',
-            opitonal: '#eae6ff'  // Icon backgrond
+            default: mode === 'light' ? "#ffff" : '#17153B',      // Body background
+            main: mode === 'light' ? '#FFFDF6' : '#2E236C',
+            primary: mode === 'light' ? "#f1e6c1" : '#000',
+            opitonal: '#f2f8ed'  // Icon backgrond
         },
         primary: {
-            main: mode === 'light' ? "#C5BAFF" : "#C8ACD6",         // Accent color for buttons, links, icons
-            contrastText: "#121212",
+            main: mode === 'light' ? "#A0C878" : "#C8ACD6",         // Accent color for buttons, links, icons
+            contrastText: mode === 'light'?"#121212" :'#fff',
         },
         text: {
-            default: '#000',
+            default: '#fff',
             primary: mode === 'light' ? "#121212" : '#ffff',
             secondary: mode === 'light' ?"#4F4F4F":'#fff',
         },
@@ -38,7 +38,7 @@ const setAppMode = (mode) => ({
         MuiIconButton: {
             styleOverrides: {
                 root: {
-                    color: "#C5BAFF",
+                    color: "#A0C878",
                 },
             },
         },
@@ -50,7 +50,7 @@ const setAppMode = (mode) => ({
                     borderColor: 'black', // Default
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#e9afdf', // Focus color
+                    borderColor: '#FFFDF6', // Focus color
                 },
             },
         },

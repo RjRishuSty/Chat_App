@@ -52,6 +52,7 @@ const InputesFields = ({ useIn, handleChange }) => {
                                             onClick={() => setShowPassword(!showPassword)}
                                             edge="end"
                                             size="small"
+                                            sx={{color:'primary.main'}}
                                         >
                                             {showPassword ? (
                                                 <VisibilityOff />

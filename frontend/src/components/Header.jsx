@@ -16,15 +16,28 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/auth.slice";
 import { useNavigate } from "react-router-dom";
+import useAxios from "../custom-hooks/useAxios";
+import { enqueueSnackbar } from "notistack";
 
 const Header = () => {
+    const { request } = useAxios();
     const authUser = useSelector((state) => state.auth.authUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handlerLogout = () => {
-        dispatch(logout())
-        navigate('/login')
+    const handlerLogout = async () => {
+        try {
+            const response = await request({
+                url: '/api/logout',
+                method: 'post',
+            });
+            dispatch(logout())
+            navigate('/login')
+            enqueueSnackbar(response.message, { variant: "success" });
+        } catch (error) {
+            enqueueSnackbar(error.response.data.message, { variant: "error" });
+        }
+
     }
     return (
         <Box sx={{ display: "flex" }}>
@@ -44,7 +57,7 @@ const Header = () => {
                             <Button
                                 variant="contained"
                                 size="medium"
-                                sx={{ mr: 2, color: "text.primary" }}
+                                sx={{ mr: 2, color: "text.default" }}
                                 startIcon={
                                     <Person3Icon fontSize="medium" />
                                 }
@@ -55,7 +68,7 @@ const Header = () => {
                                 onClick={handlerLogout}
                                 variant="contained"
                                 size="medium"
-                                sx={{ color: "text.primary" }}
+                                sx={{ color: "text.default" }}
                                 endIcon={
                                     <LogoutIcon fontSize="medium" />
                                 }

@@ -4,10 +4,9 @@ import Header from '../components/Header'
 
 const AppLayout = () => {
   const path = useLocation();
-  console.log(path.pathname);
   return (
     <>
-    {path.pathname === '/signup' || path.pathname === '/login'?null:<Header/>}
+    {path.pathname === '/signup' || path.pathname === '/login' || path.pathname === '/logout'?null:<Header/>}
       <Outlet />
     </>
   )

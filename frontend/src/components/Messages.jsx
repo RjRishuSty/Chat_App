@@ -5,16 +5,16 @@ const Messages = () => {
   return (
     <Stack
       sx={{
+        // border:'3px solid black',
         height: "450px",
-        mt: 1.5,
-        p:2,
         overflow:'auto',
         borderRadius:3,
-        backgroundColor:'white'
+        p:3,
+        backgroundColor:'background.default'
         
       }}
     >
-
+  hello i am rishu raj
     </Stack>
   );
 };

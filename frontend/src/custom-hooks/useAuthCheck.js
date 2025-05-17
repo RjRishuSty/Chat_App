@@ -15,9 +15,9 @@ const useAuthCheck = () => {
                     withCredentials: true
                 })
                 dispatch(checkAuth(response.data.data));
-                console.log("USE_AUTH",response.data.data)
-            } catch (error) {
-                console.log(error.message);
+                console.log("USE_AUTH", response.data.data)
+            } catch {
+                dispatch(checkAuth(null));
             }
         }
         verifyAuth();

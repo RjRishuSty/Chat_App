@@ -1,27 +1,16 @@
-import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema({
-    senderId: {
-        type: mongoose.Schema.Types.ObjectId, // id is BSON types.
-        ref: "User",
-        required: true,
-    },
-    receiverId: {
-        type: mongoose.Schema.Types.ObjectId, // id is BSON types.
-        ref: "User",
-        required: true,
-    },
-    text: {
-        type: String,
-    },
-    image: {
-        type: String,
-    }
 
-}, { timestamps: true });
+//* importing installed dependencies.......
+import { Router } from 'express';
 
- 
+//* importing local created file..........
+import { protectRoute } from '../middleware/auth.middleware.js';
+import { getMessages, getUsersForSidebar, sendMessages } from '../controller/message.controller.js';
 
-const messageModel = mongoose.model("Message", messageSchema);
+const router = Router();
 
-export default messageModel;
+router.get('/users', protectRoute, getUsersForSidebar); // This router work is show all user. who has in database.
+router.get('/:id', protectRoute, getMessages); // Selected user for chat.
+router.get('/send/:id', protectRoute, sendMessages); //Send content
+
+export default router;  

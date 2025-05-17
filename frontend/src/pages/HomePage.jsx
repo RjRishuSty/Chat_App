@@ -18,7 +18,7 @@ const HomePage = () => {
           border: 'none',
           boxShadow: 'none',
           p: 2,
-          backgroundColor:'background.main'
+          backgroundColor: 'background.main'
         }}>
         <ChatHeader />
         <ChatBody />

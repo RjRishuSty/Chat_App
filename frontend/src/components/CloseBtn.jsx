@@ -7,7 +7,7 @@ const CloseBtn = () => {
     return (
         <>
             <IconButton
-                sx={{ borderRadius: 20, backgroundColor: "background.opitonal" }}
+                sx={{ borderRadius: 20 }}
             >
                 <CloseIcon fontSize="large" color="primary" />
             </IconButton>

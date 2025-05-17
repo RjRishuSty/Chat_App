@@ -1,32 +1,46 @@
-import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import PeopleIcon from "@mui/icons-material/People";
-import ProfileStatus from "./ProfileStatus";
-import { flexItemCenter, flexSpaceBetweenCenter } from "../defaultStyle";
+import { flexSpaceBetweenCenter } from "../defaultStyle";
 import CloseBtn from "./CloseBtn";
+import UserProfile from "./UserProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleLayout } from "../store/slices/layout.slice";
 
 const ChatHeader = () => {
+    const isToggle = useSelector((state) => state.layout.toggle);
+    const dispatch = useDispatch();
 
+    const handlerToggle = () => {
+        dispatch(toggleLayout());
+    }
     return (
         <Stack>
             <Grid container>
                 <Grid
-                    size={{ md: 1, sm: 1, xs: 1 }}
-                    sx={{ borderBottom: 1, borderRight: 1, pb: 1, ...flexItemCenter }}
+                    size={{ md: isToggle ? 1 : 2, sm: isToggle ? 1 : 2, xs: isToggle ? 1 : 2 }}
+                    sx={{
+                        borderBottom: 1,
+                        borderRight: 1,
+                        p: 1,
+                        display: "flex",
+                        justifyContent: isToggle ? "center" : "start",
+                        alignItems: "center",
+                        cursor: 'pointer',
+                        boxShadow:'none',
+                        borderColor:'text.primary'
+                    }}
+                    // component={Button}
+                    onClick={handlerToggle}
                 >
-                    <IconButton
-                        sx={{ borderRadius: 20, backgroundColor: "background.opitonal" }}
-                    >
-                        <PeopleIcon
-                            sx={{ fontSize: "2rem", color: "primary" }}
-                        />
-                    </IconButton>
+                    <PeopleIcon fontSize="large" sx={{ color: "primary" }} />
+                    {!isToggle ? <Typography variant="h6" sx={{ ml: 1.5, fontWeight: 700,color:'primary.contrastText',textTransform:'capitalize' }}>Contacts</Typography> : null}
                 </Grid>
                 <Grid
-                    size={{ md: 11, sm: 11, xs: 11 }}
+                    size={{ md: isToggle ? 11 : 10, sm: isToggle ? 11 : 10, xs: isToggle ? 11 : 10 }}
                     sx={{ px: 4, pb: 1, borderBottom: 1, ...flexSpaceBetweenCenter }}
                 >
-                    <ProfileStatus />
+                    <UserProfile />
                     <CloseBtn />
                 </Grid>
             </Grid>

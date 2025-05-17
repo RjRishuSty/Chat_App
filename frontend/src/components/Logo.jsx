@@ -26,7 +26,7 @@ const Logo = ({ useIn }) => {
                     backgroundColor: useIn === 'header' ? "" : "background.opitonal"
                 }}
             >
-                <MarkChatUnreadIcon fontSize="large" color="primary" />
+                <MarkChatUnreadIcon fontSize="large" color="primary.main" />
             </IconButton>
             {useIn === 'header' ? <Typography variant="h5" component="span" fontWeight="bold">
                 Talkative

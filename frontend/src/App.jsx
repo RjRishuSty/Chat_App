@@ -11,15 +11,13 @@ import LoginPage from './pages/LoginPage';
 import SettingsPages from './pages/SettingsPages';
 import PageNotFound from './pages/PageNotFound';
 import theme from '../theme';
-import useAuthCheck from './custom-hooks/useAuthCheck';
+
 
 const App = () => {
-  useAuthCheck();
   const appMode = useSelector((state) => state.appMode.mode);
-
   const isAuth = useSelector((state) => state.auth.isAuth);
-
   const currentTheme = useMemo(() => theme(appMode), [appMode]);
+
 
   const router = useMemo(() => {
     return createBrowserRouter([
@@ -55,7 +53,6 @@ const App = () => {
       }
     ])
   }, [isAuth]);
-
   return (
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />

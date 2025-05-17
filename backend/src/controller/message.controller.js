@@ -1,8 +1,8 @@
 //* importing installed dependencies.......
 //* importing local created file..........
 import cloudinary from "../lib/cloudinary.js"
-import messageModel from "../models/message.model.js"
-import userModel from "../models/user.model.js"
+import messageModel from "../model/message.model.js"
+import userModel from "../model/user.model.js"
 
 //! Get all User. who stored in database. without me.
 const getUsersForSidebar = async (req, res) => {
@@ -16,10 +16,10 @@ const getUsersForSidebar = async (req, res) => {
             message: 'Internal sever error!',
             success: false,
             error: error.message,
-        })
+        }) 
     }
 } 
-
+ 
 //! Get User messages.........
 const getMessages = async (req, res) => {
     const { id: userToChatId } = req.params;
