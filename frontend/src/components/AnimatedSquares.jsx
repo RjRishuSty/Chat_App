@@ -1,15 +1,16 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const AnimatedSquares = () => {
+  const miniLaptop = useMediaQuery("(max-width:1000px)");
   const totalSquares = 9;
 
   return (
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 100px)', 
+        gridTemplateColumns: miniLaptop?'repeat(3, 70px)':'repeat(3, 100px)', 
         gap: 4,
         justifyContent: 'center',
         alignItems: 'center',
@@ -29,8 +30,8 @@ const AnimatedSquares = () => {
         >
           <Box
             sx={{
-              width: 100,            
-              height: 100,             
+              width: miniLaptop?70:100,            
+              height: miniLaptop?70:100,             
               borderRadius: 2,
               backgroundColor: '#F8E7F6',
               boxShadow: '0 0 10px rgba(248, 231, 246, 0.4)',

@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Cards = ({ useIn }) => {
     const isTablet = useMediaQuery("(max-width:992px)");
+    const minTablet = useMediaQuery("(max-width:768px)");
+    const xsMobile = useMediaQuery("(max-width:375px)");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isAuth = useSelector((state) => state.auth.isAuth);
@@ -84,6 +86,7 @@ const Cards = ({ useIn }) => {
             onSubmit={handleSubmit}
             sx={{
                 width: isTablet ? "100%" : "80%",
+                height:'100%',
                 backgroundColor: "transparent",
                 "--Paper-overlay": "none",
                 backgroundImage: "none",
@@ -93,16 +96,19 @@ const Cards = ({ useIn }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
-                p: 5
+                py:xsMobile?4: 5,
+                px:xsMobile?2: 5,
             }}
         >
-            <Logo useIn="inCard" />
-            <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
-                {useIn === 'login' ? "Welcome Back" : "Create Account"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 3 }}>
-                {useIn === 'login' ? "Sign in to your account" : "Get started with your free account"}
-            </Typography>
+            {!minTablet ?<>
+                <Logo useIn="inCard" />
+                <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
+                    {useIn === 'login' ? "Welcome Back" : "Create Account"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 3 }}>
+                    {useIn === 'login' ? "Sign in to your account" : "Get started with your free account"}
+                </Typography>
+            </>:null}
             {renderCardContent()}
             <Button
                 fullWidth

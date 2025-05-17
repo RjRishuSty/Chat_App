@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 //! Importing created file.............
 import AnimatedSquares from "../components/AnimatedSquares";
 import Cards from "../components/Cards";
+import HeaderLoginAndSignup from "../components/HeaderLoginAndSignup";
 
 //! Reusable Flex Center Style
 const flexCenterColumn = {
@@ -42,7 +43,11 @@ const LoginPage = () => {
           size={{ xs: 12, sm: isTablet ? 12 : 6, md: 6 }}
           sx={{
             backgroundColor: 'background.main',
-            height: "100%",
+            height: isTablet ? "auto" : "100%",
+            order: { xs: 2, sm: 2, md: 1 },
+            borderTopLeftRadius: isTablet ? 50 : 0,
+            borderTopRightRadius: isTablet ? 50 : 0,
+            mt: isTablet ? -10 : 0,
             ...flexCenterColumn
 
           }}
@@ -58,7 +63,8 @@ const LoginPage = () => {
           size={{ xs: 12, sm: 6, md: 6 }}
           sx={{
             backgroundColor: 'background.primary',
-            height: "100%",
+            height: isTablet ? "auto" : "100%",
+            order: { xs: 1, sm: 1, md: 2 },
             ...flexCenterColumn
           }}
           component={motion.div}
@@ -75,7 +81,7 @@ const LoginPage = () => {
             <Typography variant="h4">Welcome back!</Typography>
             <Typography variant="body1" sx={{ textAlign: 'center', width: '80%', mt: 1, color: 'text.secondary' }}>Log in to continue your conversations, connect with friends, and stay updated in real-time. Your chats are just a click away.</Typography>
           </Box>
-        </Grid> : null}
+        </Grid> : <HeaderLoginAndSignup useIn='login' />}
       </Grid>
     </Stack>
 
